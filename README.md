@@ -19,12 +19,15 @@ This feature of ruby is called "string interpolation". Unfortunately C# doesn't 
 using System;
 using CSharpStringInterpolation.Lib;
 
-public static void Main()
+public class Sample
 {
-    const string src = "Id: #{Id}, Name: #{Name}, Point: #{Point}";
-    var c = new MoreComplex { Id = 1, Name = "Karthik", Point = new Point { X = 1, Y = 2 } };
-    var interpolated = c.InterpolateThis(src);
-    Console.WriteLine(interpolated);
+    public static void Main()
+    {
+        const string src = "Id: #{Id}, Name: #{Name}, Point: #{Point}";
+        var c = new MoreComplex { Id = 1, Name = "Karthik", Point = new Point { X = 1, Y = 2 } };
+        var interpolated = c.InterpolateThis(src);
+        Console.WriteLine(interpolated);
+    }
 }
 
 public class MoreComplex
