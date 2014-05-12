@@ -52,6 +52,9 @@
   <ItemGroup>
     <Compile Include="StringInterpolationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="InterpolatableSetTests.cs" />
+    <Compile Include="TypeFactoryTests.cs" />
+    <Compile Include="ValueFactoryTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CSharpStringInterpolation.Lib\CSharpStringInterpolation.Lib.csproj">

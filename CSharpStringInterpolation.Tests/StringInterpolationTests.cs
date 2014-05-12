@@ -99,4 +99,11 @@ namespace CSharpStringInterpolation.Tests
             return string.Format("({0},{1})", X, Y);
         }
     }
+
+    public class Numbers
+    {
+        public string[] Num { get; set; }
+        public int NumA { get; set; }
+        public int NumB { get; set; }
+    }
 }
