@@ -13,7 +13,7 @@ namespace CSharpStringInterpolation.Lib
         {
             var matches = Interpolatables.Matches(src);
             var varList = (from Match match in matches
-                           select ItemExtractor.Match(match.Value).Groups[3].Value).ToList();
+                           select ItemExtractor.Match(match.Value).Groups[3].Value).Distinct().ToList();
             var interpolatables = new List<Interpolatable<T>>();
 
             varList.ForEach(item => interpolatables.Add(new Interpolatable<T>
@@ -34,12 +34,13 @@ namespace CSharpStringInterpolation.Lib
                 throw new Exception("Interpolatable passed has to be of type \"Expression\"");
 
             var matches = ExprProps.Matches(interpolatable.Item);
-
-            return (from Match match in matches
-                    select new Interpolatable<T>
-                        {
-                            Item = match.Groups[0].Value, Instance = t, Type = match.Groups[0].Value.FindType()
-                        }).ToList();
+            var matchValues = matches.Cast<Match>().Select(m => m.Groups[0].Value).Distinct();
+            return matchValues.Select(m => new Interpolatable<T>
+                {
+                    Item = m,
+                    Instance = t,
+                    Type = m.FindType()
+                }).ToList();
         }
 
         private static readonly Regex Interpolatables = new Regex(@"\#\{[a-zA-Z0-9\[\]\+\-\*\/ ]+\}");

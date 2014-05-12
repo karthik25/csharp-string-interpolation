@@ -27,7 +27,7 @@ namespace CSharpStringInterpolation.Lib
             }
             if (interpolatable.Type == InterpolatableType.Expression)
             {
-                var exprInterpolatables = interpolatable.InterpolatablesOfExpr((T)interpolatable.Instance, interpolatable.Item);
+                var exprInterpolatables = interpolatable.InterpolatablesOfExpr(interpolatable.Instance, interpolatable.Item);
                 var constructedString = interpolatable.Item;
                 exprInterpolatables.ForEach(item =>
                     {

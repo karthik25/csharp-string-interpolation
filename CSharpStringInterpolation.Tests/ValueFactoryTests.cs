@@ -51,5 +51,20 @@ namespace CSharpStringInterpolation.Tests
             var value = interpolatable.Value;
             Assert.AreEqual("3", value);
         }
+
+        [TestMethod]
+        public void CanGetExpressionValue2()
+        {
+            const string src = "Sum of #{(NumA + NumB) * (NumB * NumB)} is stored in C";
+            var nums = new Numbers { Num = new[] { "1", "2" }, NumA = 1, NumB = 2 };
+            var interpolatable = new Interpolatable<Numbers>
+            {
+                Item = "(NumA + NumB) * (NumB * NumB)",
+                Type = InterpolatableType.Expression,
+                Instance = nums
+            };
+            var value = interpolatable.Value;
+            Assert.AreEqual("12", value);
+        }
     }
 }

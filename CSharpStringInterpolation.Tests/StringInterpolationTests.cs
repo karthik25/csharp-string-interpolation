@@ -18,6 +18,17 @@ namespace CSharpStringInterpolation.Tests
         }
 
         [TestMethod]
+        public void CanInterpolateASimpleStringWithDuplicates()
+        {
+            const string src = "Some string that is #{Replaceable} and #{Replaceable}";
+            const string expected = "Some string that is irreplaceable and irreplaceable";
+            var s = new Sample { Replaceable = "irreplaceable" };
+            var o = (object)s;
+            var actual = o.Interpolate(src);
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
         public void CanInterpolateASimpleStringWithTwoProps()
         {
             const string src = "Some string that is #{Replaceable} and #{AnotherString}";
