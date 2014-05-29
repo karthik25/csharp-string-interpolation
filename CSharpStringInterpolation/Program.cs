@@ -18,6 +18,8 @@ namespace CSharpStringInterpolation
             Sample3();
             Sample4();
             Sample5();
+            Sample6();
+            Sample7();
         }
 
         private static void Sample1()
@@ -57,6 +59,22 @@ namespace CSharpStringInterpolation
             var nums = new Numbers { Num = new string[] { "1", "2", "3" } };
             var interpolated = nums.InterpolateThis(src);
             Print(src, interpolated);
+        }
+
+        public static void Sample6()
+        {
+            const string src = "NumA = #{NumA}";
+            var nums = new Numbers { Num = new[] { "1", "2" }, NumA = 1, NumB = 2 };
+            var interpolatables = nums.InterpolateThis(src);
+            Print(src, interpolatables);
+        }
+
+        public static void Sample7()
+        {
+            const string src = "Sum of #{NumA + NumB} is stored in C";
+            var nums = new Numbers { Num = new[] { "1", "2" }, NumA = 1, NumB = 2 };
+            var interpolatables = nums.InterpolateThis(src);
+            Print(src, interpolatables);
         }
 
         private static readonly Action<string, string> Print = (src, interpolated) =>
