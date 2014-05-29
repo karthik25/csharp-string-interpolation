@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reflection;
 using CSharpStringInterpolation.Items;
 using CSharpStringInterpolation.Lib;
 
@@ -13,13 +15,10 @@ namespace CSharpStringInterpolation
 
         public static void CallSamples()
         {
-            Sample1();
-            Sample2();
-            Sample3();
-            Sample4();
-            Sample5();
-            Sample6();
-            Sample7();
+            var methods = typeof (Program).GetMethods(BindingFlags.NonPublic | BindingFlags.Static)
+                                          .Where(m => m.Name.StartsWith("Sample"))
+                                          .ToList();
+            methods.ForEach(method => method.Invoke(null, null));
         }
 
         private static void Sample1()
@@ -53,7 +52,7 @@ namespace CSharpStringInterpolation
             Print(src, interpolated);
         }
 
-        public static void Sample5()
+        private static void Sample5()
         {
             const string src = "This is the first number #{Num[0]}";
             var nums = new Numbers { Num = new string[] { "1", "2", "3" } };
@@ -61,7 +60,7 @@ namespace CSharpStringInterpolation
             Print(src, interpolated);
         }
 
-        public static void Sample6()
+        private static void Sample6()
         {
             const string src = "NumA = #{NumA}";
             var nums = new Numbers { Num = new[] { "1", "2" }, NumA = 1, NumB = 2 };
@@ -69,9 +68,17 @@ namespace CSharpStringInterpolation
             Print(src, interpolatables);
         }
 
-        public static void Sample7()
+        private static void Sample7()
         {
             const string src = "Sum of #{NumA + NumB} is stored in C";
+            var nums = new Numbers { Num = new[] { "1", "2" }, NumA = 1, NumB = 2 };
+            var interpolatables = nums.InterpolateThis(src);
+            Print(src, interpolatables);
+        }
+
+        private static void Sample8()
+        {
+            const string src = "NumA + NumB = #{NumA+NumB}";
             var nums = new Numbers { Num = new[] { "1", "2" }, NumA = 1, NumB = 2 };
             var interpolatables = nums.InterpolateThis(src);
             Print(src, interpolatables);
