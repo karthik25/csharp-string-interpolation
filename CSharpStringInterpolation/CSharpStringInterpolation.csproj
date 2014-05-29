@@ -41,8 +41,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Items\Complex.cs" />
+    <Compile Include="Items\Data.cs" />
+    <Compile Include="Items\Numbers.cs" />
+    <Compile Include="Items\Point.cs" />
+    <Compile Include="Items\MoreComplex.cs" />
+    <Compile Include="Items\Sample.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Items\SampleActual.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -61,6 +61,10 @@
       <Project>{f3449a40-1929-4587-91f8-29d57b833696}</Project>
       <Name>CSharpStringInterpolation.Lib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\CSharpStringInterpolation\CSharpStringInterpolation.csproj">
+      <Project>{765637F9-FB82-46E4-A6E6-24E8BECDF1C1}</Project>
+      <Name>CSharpStringInterpolation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

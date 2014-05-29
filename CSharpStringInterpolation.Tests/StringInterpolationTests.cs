@@ -1,4 +1,5 @@
-﻿using CSharpStringInterpolation.Lib;
+﻿using CSharpStringInterpolation.Items;
+using CSharpStringInterpolation.Lib;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CSharpStringInterpolation.Tests
@@ -79,42 +80,5 @@ namespace CSharpStringInterpolation.Tests
             var actual = c.Interpolate(src);
             Assert.AreEqual(expected, actual);
         }
-    }
-
-    public class Sample
-    {
-        public string Replaceable { get; set; }
-        public string AnotherString { get; set; }
-    }
-
-    public class Complex
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class MoreComplex
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public Point Point { get; set; }
-    }
-
-    public class Point
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public override string ToString()
-        {
-            return string.Format("({0},{1})", X, Y);
-        }
-    }
-
-    public class Numbers
-    {
-        public string[] Num { get; set; }
-        public int NumA { get; set; }
-        public int NumB { get; set; }
     }
 }

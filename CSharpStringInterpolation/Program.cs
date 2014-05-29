@@ -1,4 +1,5 @@
 ﻿using System;
+using CSharpStringInterpolation.Items;
 using CSharpStringInterpolation.Lib;
 
 namespace CSharpStringInterpolation
@@ -16,14 +17,14 @@ namespace CSharpStringInterpolation
             Sample2();
             Sample3();
             Sample4();
+            Sample5();
         }
 
         private static void Sample1()
         {
             var data = new Data { Id = "1", Name = "Karthik Anant", Email = "karthik@gmail.com" };
             var interpolated = "Id: #{Id}, Name: #{Name}, Email: #{Email}".InterpolateUsing(data);
-            Console.WriteLine(interpolated);
-            Console.WriteLine();
+            Print("Id: #{Id}, Name: #{Name}, Email: #{Email}", interpolated);
         }
 
         private static void Sample2()
@@ -31,8 +32,7 @@ namespace CSharpStringInterpolation
             var data = new Data { Id = "1", Name = "Karthik Anant", Email = "karthik@gmail.com" };
             const string str = "Id: #{Id}, Name: #{Name}, Email: #{Email}";
             var interpolated = data.InterpolateThis(str);
-            Console.WriteLine(interpolated);
-            Console.WriteLine();
+            Print(str, interpolated);
         }
 
         private static void Sample3()
@@ -40,8 +40,7 @@ namespace CSharpStringInterpolation
             var data = new Data { Id = "1", Name = "Karthik Anant", Email = "karthik@gmail.com" };
             const string str = "Id: #{Id, Name: #{Name, Email: #{Email";
             var interpolated = data.InterpolateThis(str);
-            Console.WriteLine(interpolated);
-            Console.WriteLine();
+            Print(str, interpolated);
         }
 
         private static void Sample4()
@@ -49,38 +48,37 @@ namespace CSharpStringInterpolation
             const string src = "Id: #{Id}, Name: #{Name}, Point: #{Point}";
             var c = new MoreComplex { Id = 1, Name = "Karthik", Point = new Point { X = 1, Y = 2 } };
             var interpolated = c.InterpolateThis(src);
-            Console.WriteLine(interpolated);
-            Console.WriteLine();
+            Print(src, interpolated);
         }
-    }
 
-    public class SampleActual
-    {
-        public string Reference { get; set; }
-    }
-
-    public class Data
-    {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Email { get; set; }
-    }
-
-    public class MoreComplex
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public Point Point { get; set; }
-    }
-
-    public class Point
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-
-        public override string ToString()
+        public static void Sample5()
         {
-            return string.Format("({0},{1})", X, Y);
+            const string src = "This is the first number #{Num[0]}";
+            var nums = new Numbers { Num = new string[] { "1", "2", "3" } };
+            var interpolated = nums.InterpolateThis(src);
+            Print(src, interpolated);
         }
+
+        private static readonly Action<string, string> Print = (src, interpolated) =>
+            {
+                var oldColor = Console.ForegroundColor;
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("Transformed: ");
+                Console.ForegroundColor = oldColor;
+
+                Console.WriteLine(src);
+
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("In to: ");
+                Console.ForegroundColor = oldColor;
+
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine(interpolated);
+                Console.WriteLine();
+                Console.WriteLine();
+
+                Console.ForegroundColor = oldColor;
+            };
     }
 }
