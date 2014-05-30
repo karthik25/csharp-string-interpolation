@@ -48,3 +48,10 @@ public class Point
   }
 }
 ```
+
+# What's Supported?
+
+* Simple properties like integers, string etc.
+* Complex properties that has overridden ToString()
+* Array based properties
+* Simple expressions like Property1 + Property2 etc etc.
